@@ -45,7 +45,7 @@ const formatDiamondOrder = async ({ order }) => {
     }),
     delivery_address: {
       date: order.updated_at,
-      type: "STORE",
+      type: "HOME",
       address: {
         company: order.shipping_address.company,
         address: order.shipping_address.address1,
@@ -55,7 +55,7 @@ const formatDiamondOrder = async ({ order }) => {
         country: order.shipping_address.country,
         contact_name: order.shipping_address.name,
         telephone_number: order.shipping_address.phone,
-        deliverToCompanyAddress: order.shipping_address.company != null
+        deliverToCompanyAddress: true
       }
     }
   }
@@ -76,7 +76,7 @@ const formatHendiOrder = ({ order }) => {
     }),
     delivery_address: {
       date: order.updated_at,
-      type: "STORE",
+      type: "HOME",
       address: {
         company: order.shipping_address.company,
         address: order.shipping_address.address1,
@@ -86,7 +86,7 @@ const formatHendiOrder = ({ order }) => {
         country: order.shipping_address.country,
         contact_name: order.shipping_address.name,
         telephone_number: order.shipping_address.phone,
-        deliverToCompanyAddress: order.shipping_address.company != null
+        deliverToCompanyAddress: true
       }
     }
   }
