@@ -4,9 +4,7 @@ dotenv.config();
 dotenv.config({ path: './.env.secret' });
 
 import express from 'express';
-import fs from 'fs';
 import http from 'http';
-import https from 'https';
 import cron from 'node-cron';
 import { migrateProductList, syncOrder, syncProductList } from './controllers/index.js';
 
@@ -31,10 +29,10 @@ app.post('/api/orders/upload', async (req, res) => {
       message: "Cannot find origin Store!"
     };
 
-    if(req.body.financial_status != "paid")throw {
-      status_code: 400,
-      message: "Order not paid yet!"
-    };
+    // if(req.body.financial_status != "paid")throw {
+    //   status_code: 400,
+    //   message: "Order not paid yet!"
+    // };
 
     const sync_result = await syncOrder({
       order: req.body,
@@ -60,28 +58,18 @@ app.post('/api/orders/upload', async (req, res) => {
 });
 
 console.log("Tracking Product Updates every day at 12AM.....");
-cron.schedule('0 0 * * *', async () => {
-  //sync products in Diamond
-  await syncProductList({ storeName: "DIAMOND", frequency: "daily" });
-});
+// cron.schedule('0 0 * * *', async () => {
+//   //sync products in Diamond
+//   await syncProductList({ storeName: "DIAMOND", frequency: "daily" });
+// });
 
 console.log("Tracking Product Updates every hour.....");
-cron.schedule('0 * * * *', async () => {
-  //sync products in Diamond
-  await syncProductList({ storeName: "DIAMOND", frequency: "hourly" });
-});
-
-const sslOptions = {
-  key: fs.readFileSync(process.env.SSL_KEY_PATH),
-  cert: fs.readFileSync(process.env.SSL_CERT_PATH)
-};
+// cron.schedule('0 * * * *', async () => {
+//   //sync products in Diamond
+//   await syncProductList({ storeName: "DIAMOND", frequency: "hourly" });
+// });
 
 // HTTP server (port 80)
 http.createServer(app).listen(80, () => {
   console.log('HTTP server running on port 80');
-});
-
-// HTTPS server (port 443)
-https.createServer(sslOptions, app).listen(443, () => {
-  console.log('HTTPS server running on port 443');
 });
