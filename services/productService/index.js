@@ -199,13 +199,13 @@ export const syncProductChangesDaily = async ({
       
       if(!found_shopify_product)return false;
 
-      const shopify_product_images = found_shopify_product.media.nodes;
+      const shopify_product_images = found_shopify_product?.media?.nodes;
       const diamond_product_images = product.attributes.media.images.filter(image_object=>image_object.big).map(image_object=>image_object.big);
 
       //get newly-added images
       const newly_added_images = diamond_product_images.filter(diamond_image=>{
         const diamond_image_name = diamond_image.split("/").at(-1).split(".")[0];
-        return !shopify_product_images.find(shopify_image=>shopify_image.image.url.includes(diamond_image_name));
+        return !shopify_product_images.find(shopify_image=>shopify_image?.image?.url.includes(diamond_image_name));
       });
 
       if(newly_added_images.length > 0)add_image_products.push({
@@ -215,7 +215,7 @@ export const syncProductChangesDaily = async ({
 
       //get newly-deleted images
       const newly_deleted_images = shopify_product_images.filter(shopify_image=>{
-        const shopify_image_name = shopify_image.image.url.split("/").at(-1).split(".")[0].split("_")[0];
+        const shopify_image_name = shopify_image?.image?.url.split("/").at(-1).split(".")[0].split("_")[0];
         return !diamond_product_images.find(diamond_image=>diamond_image.includes(shopify_image_name));
       }).map(shopify_image=>shopify_image.id);
 
