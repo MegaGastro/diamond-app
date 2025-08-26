@@ -1,5 +1,4 @@
-import { chunkArray, createProductAPI, logRecordToFile, product_all_metafields, remaining_metafield_keys, removeArrayDuplicates, shopifyFetch } from "../../helpers/index.js";
-import { getAllPublications, publishablePublish, updateMetafields, uploadS3FilesToShopify } from "../../helpers/index.js";
+import { chunkArray, createProductAPI, getAllPublications, logRecordToFile, publishablePublish, removeArrayDuplicates, shopifyFetch, store_data, uploadS3FilesToShopify } from "../../helpers/index.js";
 
 export const syncProductChangesDaily = async ({ 
   product_list,
@@ -475,9 +474,9 @@ export const createProduct = async ({ productData, store, uploaded_files }) => {
     if(uploaded_files && uploaded_files.length > 0)product_files = product_files.concat(uploaded_files);
 
     //Step 1: Add default metafield data
-    remaining_metafield_keys.forEach(key=>{
+    store_data[store].remaining_metafield_keys.forEach(key=>{
       if(productData.attributes[key] !== null && productData.attributes[key] !== ""){
-        metafields.push(product_all_metafields[key](productData.attributes[key]));
+        metafields.push(store_data[store].product_all_metafields[key](productData.attributes[key]));
       }
     });
 
