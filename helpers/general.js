@@ -95,3 +95,12 @@ export const findDuplicates = (array) => {
 
   return [...new Set(duplicates)]; // removes repeated duplicates
 }
+
+export const handleize = (str) => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\p{L}0-9\s\-+]/gu, '')  // Keep all Unicode letters, digits, spaces, hyphens, plus
+    .replace(/\s+/g, '-')               // Replace spaces with hyphens
+    .replace(/-+/g, '-');               // Collapse multiple hyphens
+};
