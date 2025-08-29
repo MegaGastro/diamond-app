@@ -49,7 +49,7 @@ app.post('/api/orders/upload', async (req, res) => {
       message: "Order Synced"
     });
   } catch (error) {
-    console.log("error", error);
+    console.log("order_sync_error", error);
     res.status(error.status_code || 400).json({
       status: "error",
       message: error.message

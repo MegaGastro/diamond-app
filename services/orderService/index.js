@@ -47,15 +47,15 @@ const formatDiamondOrder = async ({ order }) => {
       date: order.updated_at,
       type: "HOME",
       address: {
-        company: order.shipping_address.company,
-        address: order.shipping_address.address1,
-        address2: order.shipping_address.address2,
-        postal_code: order.shipping_address.zip,
-        city: order.shipping_address.city,
-        country: order.shipping_address.country,
-        contact_name: order.shipping_address.name,
-        telephone_number: order.shipping_address.phone,
-        deliverToCompanyAddress: true
+        company: order.shipping_address?.company || "",
+        address: order.shipping_address?.address1 || "",
+        address2: order.shipping_address?.address2 || "",
+        postal_code: order.shipping_address?.zip || "",
+        city: order.shipping_address?.city || "",
+        country: order.shipping_address?.country || "",
+        contact_name: order.shipping_address?.name || "",
+        telephone_number: order.shipping_address?.phone || "",
+        deliverToCompanyAddress: false
       }
     }
   }
@@ -78,15 +78,15 @@ const formatHendiOrder = ({ order }) => {
       date: order.updated_at,
       type: "HOME",
       address: {
-        company: order.shipping_address.company,
-        address: order.shipping_address.address1,
-        address2: order.shipping_address.address2,
-        postal_code: order.shipping_address.zip,
-        city: order.shipping_address.city,
-        country: order.shipping_address.country,
-        contact_name: order.shipping_address.name,
-        telephone_number: order.shipping_address.phone,
-        deliverToCompanyAddress: true
+        company: order.shipping_address?.company || "",
+        address: order.shipping_address?.address1 || "",
+        address2: order.shipping_address?.address2 || "",
+        postal_code: order.shipping_address?.zip || "",
+        city: order.shipping_address?.city || "",
+        country: order.shipping_address?.country || "",
+        contact_name: order.shipping_address?.name || "",
+        telephone_number: order.shipping_address?.phone || "",
+        deliverToCompanyAddress: false
       }
     }
   }
