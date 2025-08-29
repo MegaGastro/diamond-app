@@ -690,7 +690,7 @@ export const updateProductRelationships = async ({ diamond_products, queried_sho
   //get all referenced Shopify product skus
   var referenced_shopify_product_skus = removeArrayDuplicates(diamond_products.map(product=>{
     var sku_array = [];
-    if(product.relationships?.includedProducts?.length > 0)sku_array = sku_array.concat(product.relationships?.includedProducts?.data.map(p=>p.id));
+    if(product.relationships?.includedProducts?.data?.length > 0)sku_array = sku_array.concat(product.relationships?.includedProducts?.data.map(p=>p.id));
     if(product.attributes.accessories.length > 0)sku_array = sku_array.concat(product.attributes.accessories);
     if(product.attributes.replacement_product_id != null)sku_array = sku_array.concat([product.attributes.replacement_product_id]);
     return sku_array;
