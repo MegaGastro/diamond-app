@@ -50,7 +50,7 @@ app.post('/api/orders/upload', async (req, res) => {
     });
   } catch (error) {
     console.log("error", error);
-    res.status(error.status_code).json({
+    res.status(error.status_code || 400).json({
       status: "error",
       message: error.message
     });
