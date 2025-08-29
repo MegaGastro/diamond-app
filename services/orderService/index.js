@@ -55,7 +55,7 @@ const formatDiamondOrder = async ({ order }) => {
         country: order.shipping_address?.country || "",
         contact_name: order.shipping_address?.name || "",
         telephone_number: order.shipping_address?.phone || "",
-        deliverToCompanyAddress: false
+        deliverToCompanyAddress: true
       }
     }
   }
@@ -86,7 +86,7 @@ const formatHendiOrder = ({ order }) => {
         country: order.shipping_address?.country || "",
         contact_name: order.shipping_address?.name || "",
         telephone_number: order.shipping_address?.phone || "",
-        deliverToCompanyAddress: false
+        deliverToCompanyAddress: true
       }
     }
   }
