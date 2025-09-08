@@ -35,16 +35,15 @@ const formatDiamondOrder = async ({ order }) => {
   return {
     comments: order.note || "",
     reference: order.name,
-    is_draft: false,
+    is_draft: 0,
     items: order.line_items.map((line_item)=>{
       return {
         id: line_item.sku,
         type: "products",
-        qty: line_item.quantity,
-        // name: line_item.name
+        qty: line_item.quantity
       }
     }),
-    delivery_address: {
+    equipment_delivery: {
       date: order.updated_at,
       type: "HOME",
       address: {
@@ -67,16 +66,15 @@ const formatHendiOrder = ({ order }) => {
   return {
     comments: order.note || "",
     reference: order.name,
-    is_draft: false,
+    is_draft: 0,
     items: order.line_items.map((line_item)=>{
       return {
         id: line_item.sku,
         type: "products",
-        qty: line_item.quantity,
-        // name: line_item.name
+        qty: line_item.quantity
       }
     }),
-    delivery_address: {
+    equipment_delivery: {
       date: order.updated_at,
       type: "HOME",
       address: {
