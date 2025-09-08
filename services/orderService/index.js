@@ -33,7 +33,7 @@ export const formatOrder = async ({ order, store }) => {
 const formatDiamondOrder = async ({ order }) => {
   //sample return
   return {
-    comments: "testapi",
+    comments: order.note,
     reference: order.name,
     is_draft: false,
     items: order.line_items.map((line_item)=>{
@@ -65,8 +65,8 @@ const formatDiamondOrder = async ({ order }) => {
 const formatHendiOrder = ({ order }) => {
   //sample return
   return {
-    comments: "testapi",
-    reference: "order-reference",
+    comments: order.note,
+    reference: order.name,
     is_draft: false,
     items: order.line_items.map((line_item)=>{
       return {
