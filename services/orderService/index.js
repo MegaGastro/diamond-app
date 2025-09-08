@@ -34,7 +34,7 @@ const formatDiamondOrder = async ({ order }) => {
   //sample return
   return {
     comments: "testapi",
-    reference: "order-reference",
+    reference: order.name,
     is_draft: false,
     items: order.line_items.map((line_item)=>{
       return {
