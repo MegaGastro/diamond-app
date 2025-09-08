@@ -21,7 +21,7 @@ export const syncOrder = async ({ order, store }) => {
       store
     });
 
-    // console.log("formatted_order", formatted_order);
+    console.log("formatted_order", formatted_order);
 
     if(!formatted_order)throw {
       status: 500,
@@ -38,6 +38,7 @@ export const syncOrder = async ({ order, store }) => {
     // console.log("uploadOrderResult", uploadOrderResult);
 
     if(!uploadOrderResult.data){
+      console.log("uploadOrderResult", uploadOrderResult);
       throw {
         status: 500,
         message: `Could not upload to ${store}`
