@@ -21,7 +21,7 @@ export const syncOrder = async ({ order, store }) => {
       store
     });
 
-    // console.log("formatted_order", formatted_order);
+    console.log("formatted_order", formatted_order);
 
     if(!formatted_order)throw {
       status: 500,
