@@ -1,6 +1,6 @@
 import { chunkArray, createProductAPI, getAllPublications, logRecordToFile, publishablePublish, removeArrayDuplicates, shopifyFetch, store_data, uploadS3FilesToShopify } from "../../helpers/index.js";
 
-export const syncProductChangesDaily = async ({ 
+export const syncProductChangesHalfDay = async ({ 
   product_list,
   store,
   newly_created_diamond_products
@@ -415,8 +415,8 @@ export const getProductList = async ({ store, access_token, action, frequency })
     case "hourly":
       number_of_hours_rollback = 1;
       break;
-    case "daily":
-      number_of_hours_rollback = 24;
+    case "halfday":
+      number_of_hours_rollback = 12;
       break;
     default:
       number_of_hours_rollback = 1;
