@@ -104,3 +104,13 @@ export const handleize = (str) => {
     .replace(/\s+/g, '-')               // Replace spaces with hyphens
     .replace(/-+/g, '-');               // Collapse multiple hyphens
 };
+
+export const fetchWithTimeout = async (url, options = {}, timeout = 180000) => {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  return fetch(url, { ...options, signal: controller.signal })
+    .then((response) => {
+      clearTimeout(id);
+      return response;
+    });
+};
