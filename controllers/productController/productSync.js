@@ -3,7 +3,7 @@ import { chunkArray, getAllPublications, loginAPI, logRecordToFile } from '../..
 import {
   createProductBatch,
   getProductList,
-  syncProductChangesDaily,
+  syncProductChangesHalfDay,
   syncProductChangesHourly,
   updateProductRelationships
 } from "../../services/index.js";
@@ -35,7 +35,7 @@ export const syncProductList = async ({ storeName, frequency }) => {
       const limit_per_batch = 50;
       const product_list_batches = chunkArray(product_list.data, limit_per_batch);
 
-      if(frequency == "daily"){
+      if(frequency == "halfday"){
         //sync product prices, images, product-creation and product-disable
 
         var newly_created_diamond_products = [];
@@ -45,7 +45,7 @@ export const syncProductList = async ({ storeName, frequency }) => {
         
         // sync products in batches
         for (const product_list_batch of product_list_batches) {
-          const result = await syncProductChangesDaily({
+          const result = await syncProductChangesHalfDay({
             store: storeName,
             product_list: product_list_batch,
             newly_created_diamond_products

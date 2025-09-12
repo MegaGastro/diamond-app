@@ -1,6 +1,6 @@
 import { chunkArray, createProductAPI, getAllPublications, logRecordToFile, publishablePublish, removeArrayDuplicates, shopifyFetch, store_data, uploadS3FilesToShopify } from "../../helpers/index.js";
 
-export const syncProductChangesDaily = async ({ 
+export const syncProductChangesHalfDay = async ({ 
   product_list,
   store,
   newly_created_diamond_products
@@ -415,8 +415,8 @@ export const getProductList = async ({ store, access_token, action, frequency })
     case "hourly":
       number_of_hours_rollback = 1;
       break;
-    case "daily":
-      number_of_hours_rollback = 24;
+    case "halfday":
+      number_of_hours_rollback = 12;
       break;
     default:
       number_of_hours_rollback = 1;
@@ -442,15 +442,15 @@ export const getProductList = async ({ store, access_token, action, frequency })
       break;
     default:
       break;
-  }
+  };
 
-  return fetch(url, {
+  return fetchWithTimeout({ url, options: {
     method: "GET",
     headers: {
       "Accept-Language": "de",
       "Authorization": `Bearer ${access_token}`
-    },
-  }).then(async response => {
+    }
+  }}).then(async response => {
     const contentType = response.headers.get('content-type');
 
     if (contentType && contentType.includes('application/json')) {
@@ -464,7 +464,28 @@ export const getProductList = async ({ store, access_token, action, frequency })
   })
   .catch(err => {
     console.error('Fetch failed:', err.message);
-  });;
+  });
+
+  // return fetch(url, {
+  //   method: "GET",
+  //   headers: {
+  //     "Accept-Language": "de",
+  //     "Authorization": `Bearer ${access_token}`
+  //   },
+  // }).then(async response => {
+  //   const contentType = response.headers.get('content-type');
+
+  //   if (contentType && contentType.includes('application/json')) {
+  //     return await response.json();
+  //   } else {
+  //     // Not JSON, handle accordingly
+  //     const text = await response.text(); // Read raw text (HTML, error msg, etc.)
+  //     console.error('Non-JSON error:', text);
+  //     return {};
+  //   }
+  // }).catch(err => {
+  //   console.error('Fetch failed:', err.message);
+  // });
 };  
 
 export const createProduct = async ({ productData, store, uploaded_files }) => {
