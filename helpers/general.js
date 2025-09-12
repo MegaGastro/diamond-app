@@ -105,7 +105,7 @@ export const handleize = (str) => {
     .replace(/-+/g, '-');               // Collapse multiple hyphens
 };
 
-export const fetchWithTimeout = async (url, options = {}, timeout = 180000) => {
+export const fetchWithTimeout = async ({ url, options = {}, timeout = 180000 }) => {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
   return fetch(url, { ...options, signal: controller.signal })
