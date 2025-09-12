@@ -1,4 +1,4 @@
-import { chunkArray, createProductAPI, getAllPublications, logRecordToFile, publishablePublish, removeArrayDuplicates, shopifyFetch, store_data, uploadS3FilesToShopify } from "../../helpers/index.js";
+import { chunkArray, createProductAPI, fetchWithTimeout, getAllPublications, logRecordToFile, publishablePublish, removeArrayDuplicates, shopifyFetch, store_data, uploadS3FilesToShopify } from "../../helpers/index.js";
 
 export const syncProductChangesHalfDay = async ({ 
   product_list,
