@@ -58,7 +58,7 @@ app.post('/api/orders/upload', async (req, res) => {
 });
 
 console.log("Tracking Product Updates every day at 12AM and 12PM.....");
-// cron.schedule('0 0 * * *', async () => {
+// cron.schedule('0 0,12 * * *', async () => {
 //   //sync products in Diamond
 //   await syncProductList({ storeName: "DIAMOND", frequency: "halfday" });
 // });
